@@ -1,0 +1,12 @@
+
+## 刪除 kubeflow上, "非LDAP上的user" + "lcoal admin"
+
+### use ldap:389
+
+```
+docker build -t kubeflowdeluser:v1 .
+docker run -it kubeflowdeluser:v1  --build-arg ldaphost="ldap_IP" --build-arg basedn="帳號" --build-arg basednpw="密碼" --build-arg bindDN="搜尋位置 ex: ou=example,dc=example,dc=com"
+```
+
+
+

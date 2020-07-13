@@ -1,0 +1,12 @@
+## 當LDAP user 刪除後 排程刪除 kubeflow profile
+## 建立一個 serviceaccount
+```
+kubectl apply -f ServiceAccount.yaml
+```
+
+## 編輯 cronjob.yaml env
+
+## 部屬cronjob
+```
+kubectl apply -f cronjob.yaml
+```

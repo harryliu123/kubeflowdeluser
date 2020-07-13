@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: kubeflowdeluser
+  namespace: kubeflow
+spec:
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubeflowdeluser
+            image: harry101031/kubeflowdeluser:v1
+            env:
+            - name: ldaphost 
+              value: "10.1.190.86"
+            - name: basedn 
+              value: harry
+            - name: basednpw 
+              value: P@ssw0rd
+            - name: bindDN 
+              value: "ou=example,dc=example,dc=com"
+            args:
+            - /bin/sh
+            - -c
+            - run.sh
+          serviceAccountName: kubeflowdeluser-service-account
+          restartPolicy: OnFailure
