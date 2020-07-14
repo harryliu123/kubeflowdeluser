@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
           - name: kubeflowdeluser
-            image: harry101031/kubeflowdeluser:v2
+            image: harry101031/kubeflowdeluser:v1.0
             env:
             - name: ldaphost 
               value: "10.1.190.86"
@@ -28,4 +28,4 @@ spec:
             - -c
             - run.sh
           serviceAccountName: kubeflowdeluser-service-account
-          restartPolicy: OnFailure
+          restartPolicy: Never

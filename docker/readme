@@ -5,8 +5,8 @@
 
 ```
 git clone https://github.com/harryliu123/kubeflowdeluser.git
-docker build -t kubeflowdeluser:v2 .
-docker run -it kubeflowdeluser:v2  --build-arg ldaphost="ldap_IP" --build-arg basedn="帳號" --build-arg basednpw="密碼" --build-arg bindDN="搜尋位置 ex: ou=example,dc=example,dc=com"
+docker build -t kubeflowdeluser:v1.0 .
+docker run -it kubeflowdeluser:v1.0  --build-arg ldaphost="ldap_IP" --build-arg basedn="帳號" --build-arg basednpw="密碼" --build-arg bindDN="搜尋位置 ex: ou=example,dc=example,dc=com"
 ```
 
 
