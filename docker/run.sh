@@ -21,7 +21,7 @@ dexlocalaccount=$(kubectl get configmap dex -n auth -o jsonpath='{.data.config\.
 
 
 ## rancher 將 { name:<projectname>, id:<projectid> }
-# arr=$(curl -k -u "token-mq62m:566rcljcnc4qx44ncbhm769jhpclb6pstw2bcscjjhbhmbgrbd6q6d" -X GET  'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects' |jq .data| jq .[] |jq '{ name : .name , id : .id}')
+# arr=$(curl -k -u "token-mq62m:566rccjjhbhmbgrbd6q6d" -X GET  'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects' |jq .data| jq .[] |jq '{ name : .name , id : .id}')
 
 
 
@@ -49,7 +49,7 @@ do
 #         projectid=$(echo $arr |jq '. | select(.name=="'$pname'") | .id' | awk -F'"' '{print $2}')
 
           ## 刪除rancher project
-#         curl -k -u "token-mq62m:566rcljcnc4qx44ncbhm769jhpclb6pstw2bcscjjhbhmbgrbd6q6d" -X DELETE -H 'Accept: application/json' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects/'$projectid
+#         curl -k -u "token-mq62m:566rcscjjhbhmbgrbd6q6d" -X DELETE -H 'Accept: application/json' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects/'$projectid
     else
           echo "Ldap/dex_local have user nothing"
     fi
@@ -59,8 +59,8 @@ done
 
 ## 以下補充
 ## rancher 新增project
-# curl -k -u "token-mq62m:566rcljcnc4qx44ncbhm769jhpclb6pstw2bcscjjhbhmbgrbd6q6d" -X POST -H 'Content-Type: application/json' -d '{"name": "foo"}' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects' 
+# curl -k -u "token-mq62m:566rhbhmbgrbd6q6d" -X POST -H 'Content-Type: application/json' -d '{"name": "foo"}' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects' 
  
  
 ## rancher官方提供 刪除projectid
-# curl -k -u "token-mq62m:566rcljcnc4qx44ncbhm769jhpclb6pstw2bcscjjhbhmbgrbd6q6d" -X DELETE -H 'Accept: application/json' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects/c-djc8z:p-mh8pm' 
+# curl -k -u "token-mq62m:566rcljjjhbhmbgrbd6q6d" -X DELETE -H 'Accept: application/json' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects/c-djc8z:p-mh8pm' 
