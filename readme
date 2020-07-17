@@ -1,12 +1,18 @@
 ## 當LDAP user 刪除後 排程刪除 kubeflow profile
 ## 建立一個 serviceaccount
-```
+```bash
 kubectl apply -f ServiceAccount.yaml
 ```
 
 ## 編輯 cronjob.yaml env
+```
+### 如果沒有rancher project 刪除需求, 請將rancherurl, BearerToken, clusterid 變數留空白
+### 如果有刪除 project 需求 建立project 時名稱務必與 kubeflow建立名稱一致
+### BearerToken 在rancher 個人頭像位置--> API & key --> 添加key
+```
 
 ## 部屬cronjob
-```
+```bash
 kubectl apply -f cronjob.yaml
 ```
+

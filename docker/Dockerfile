@@ -15,6 +15,9 @@ ARG ldaphost
 ARG basedn
 ARG basednpw
 ARG bindDN
+ARG rancherurl
+ARG BearerToken
+ARG clusterid
 
 COPY --from=builder /kubectl /usr/local/bin/kubectl
 COPY --from=builder /jq /usr/local/bin/jq

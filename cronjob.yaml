@@ -23,6 +23,12 @@ spec:
               value: password
             - name: bindDN 
               value: "ou=example,dc=example,dc=com"
+            - name: rancherurl 
+              value: "rancher.10.1.190.80.nip.io"
+            - name: BearerToken 
+              value: "token-gkkcr:jpvssjnvsv8kvzmv4q599b8fs254sz9fggk"
+            - name: clusterid 
+              value: "c-djc8z"
             args:
             - /bin/sh
             - -c

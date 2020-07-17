@@ -5,9 +5,9 @@
 #basednpw="密碼"
 #bindDN="ou=example,dc=example,dc=com"  ## 搜尋的位置
 # 如果修改下方三條件, 會連同 rancher的 project 一起刪除
-## 修改下方 rancher位置 取代 rancher.10.1.190.80.nip.io
-## 取得 rancher 的token
-## 取代rancher 的 cluster_id : c-djc8z
+#rancherurl=<位置>
+#BearerToken=<>
+#clusterid=<>
 
 ## 確定LDAP 連線正常
 ldapstatus=$(ldapsearch -x -h $ldaphost -D $basedn -p 389 -w $basednpw |grep numResponses)
@@ -21,7 +21,7 @@ dexlocalaccount=$(kubectl get configmap dex -n auth -o jsonpath='{.data.config\.
 
 
 ## rancher 將 { name:<projectname>, id:<projectid> }
-# arr=$(curl -k -u "token-mq62m:566rccjjhbhmbgrbd6q6d" -X GET  'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects' |jq .data| jq .[] |jq '{ name : .name , id : .id}')
+arr=$(curl -k -u $BearerToken -X GET  https://$rancherurl/v3/clusters/$clusterid/projects |jq .data| jq .[] |jq '{ name : .name , id : .id}')
 
 
 
@@ -45,11 +45,13 @@ do
           echo "delete user $name"
           kubectl delete profile $name
           ## 將 name為 foo的 projectname 找到他的 rancher projectid
-#         pname=$name
-#         projectid=$(echo $arr |jq '. | select(.name=="'$pname'") | .id' | awk -F'"' '{print $2}')
-
-          ## 刪除rancher project
-#         curl -k -u "token-mq62m:566rcscjjhbhmbgrbd6q6d" -X DELETE -H 'Accept: application/json' 'https://rancher.10.1.190.80.nip.io/v3/clusters/c-djc8z/projects/'$projectid
+          if [ ! -z "$rancherurl" ] && [ ! -z "$BearerToken" ]
+		  then
+              pname=$name
+              projectid=$(echo $arr |jq '. | select(.name=="'$pname'") | .id' | awk -F'"' '{print $2}')
+              ## 刪除rancher project
+              curl -k -u $BearerToken -X DELETE -H 'Accept: application/json' https://$rancherurl/v3/clusters/c-djc8z/projects/$projectid
+          fi
     else
           echo "Ldap/dex_local have user nothing"
     fi
